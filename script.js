@@ -49,9 +49,48 @@ const updateTodo = (e) => {
         editTodo = e;
     }
 }
-
 // Function to save local todo
-
+const saveLocalTodos = (todo) => {
+    let todos;
+    if (localStorage.getItem("todos") === null) {
+        todos = [];
+    }
+    else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    todos.push(todo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+// Function to get local todo
+const getLocalTodos = () => {
+    let todos;
+    if (localStorage.getItem("todos") === null) {
+        todos = [];
+    }
+    else {
+        todos = JSON.parse(localStorage.getItem("todos"));
+        todos.forEach(todo => {
+            //Creating p tag
+            const li = document.createElement("li");
+            const p = document.createElement("p");
+            p.innerHTML = todo;
+            li.appendChild(p);
+            // Creating Edit Btn
+            const editBtn = document.createElement("button");
+            editBtn.innerText = "Edit";
+            editBtn.classList.add("btn", "editBtn");
+            li.appendChild(editBtn);
+            // Creating Delete Btn
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerText = "Remove";
+            deleteBtn.classList.add("btn", "deleteBtn");
+            li.appendChild(deleteBtn);
+            todoList.appendChild(li);
+        });
+    }
+}
+// Function to delete local todo
+const deleteLocalTodos = (todo) => {
     let todos;
     if (localStorage.getItem("todos") === null) {
         todos = [];
@@ -65,47 +104,7 @@ const updateTodo = (e) => {
     localStorage.setItem("todos", JSON.stringify(todos));
     // Array functions : slice / splice
     console.log(todoIndex);
-    const saveLocalTodos = (todo) => {
-        let todos;
-        if (localStorage.getItem("todos") === null) {
-            todos = [];
-        }
-        else {
-            todos = JSON.parse(localStorage.getItem("todos"));
-        }
-        todos.push(todo);
-        localStorage.setItem("todos", JSON.stringify(todos));
-    }
-    // Function to get local todo
-    const getLocalTodos = () => {
-        let todos;
-        if (localStorage.getItem("todos") === null) {
-            todos = [];
-        }
-        else {
-            todos = JSON.parse(localStorage.getItem("todos"));
-            todos.forEach(todo => {
-                //Creating p tag
-                const li = document.createElement("li");
-                const p = document.createElement("p");
-                p.innerHTML = todo;
-                li.appendChild(p);
-                // Creating Edit Btn
-                const editBtn = document.createElement("button");
-                editBtn.innerText = "Edit";
-                editBtn.classList.add("btn", "editBtn");
-                li.appendChild(editBtn);
-                // Creating Delete Btn
-                const deleteBtn = document.createElement("button");
-                deleteBtn.innerText = "Remove";
-                deleteBtn.classList.add("btn", "deleteBtn");
-                li.appendChild(deleteBtn);
-                todoList.appendChild(li);
-            });
-        }
-    }
-    // Function to delete local todo
-    const deleteLocalTodos = (todo) => {}
+}
 const editLocalTodos = (todo) => {
     let todos = JSON.parse(localStorage.getItem("todos"));
     let todoIndex = todos.indexOf(todo);
