@@ -6,7 +6,7 @@
 }
 body{
     background-color: rgb(232, 238, 238);
-     
+    
 }
 .container{
     display: flex;
@@ -41,7 +41,7 @@ body{
     padding: 12px 24px;
 }
 .input-container input[type="button"]:hover{
-    background-color: #7070db;
+    background-color: #5c5cd6;
 }
 ul{
     width: 70%;
